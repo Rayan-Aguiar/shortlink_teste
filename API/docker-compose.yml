@@ -1,0 +1,55 @@
+version: '3'
+services:
+
+  apache:
+    build:
+      context: .
+    container_name: apache
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./:/var/www/html
+      - ./dockerfiles/php/local.ini:/usr/local/etc/php/conf.d/local.ini
+    networks:
+      - network
+
+  db:
+    image: mysql:8.0
+    ports:
+      - "3306:3306"
+    container_name: db
+    command: --explicit_defaults_for_timestamp
+    volumes:
+      - dbdata:/var/lib/mysql
+      - ./dockerfiles/mysql/my.cnf:/etc/mysql/my.cnf
+    environment:
+      - MYSQL_ROOT_PASSWORD=1234
+      - MYSQL_DATABASE=database
+    networks:
+      - network
+
+  adminer:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "8080:80"
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
+      UPLOAD_LIMIT: 300M
+    depends_on:
+      - db
+    networks:
+      - network
+
+networks:
+  network:
+    driver: bridge
+
+volumes:
+  dbdata:
+    driver: local

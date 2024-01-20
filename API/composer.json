@@ -1,0 +1,16 @@
+{
+    "name": "rayan/shortlink",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Rayan\\Shortlink\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Rayan"
+        }
+    ],
+    "require": {}
+}
