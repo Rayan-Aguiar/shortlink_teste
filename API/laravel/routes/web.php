@@ -12,3 +12,5 @@ Route::get('/{slug}', function ($slug) {
         abort(404);
     }
 })->where('slug', '[\w\d]+');
+
+
