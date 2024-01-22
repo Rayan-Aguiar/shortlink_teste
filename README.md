@@ -52,6 +52,7 @@ Para rodar o **Back end**:
 ```bash
   cd .. 
   cd API
+  cd laravel
   cp .env.example .env
 
 ```
@@ -62,18 +63,18 @@ Para rodar o **Back end**:
 ```
 Isso iniciará os contêineres especificados no arquivo docker-compose.yml em segundo plano.
 
-3. Instale as dependências do Laravel e execute as migrações para criar as tabelas do banco de dados:
 
- ```bash
-    docker compose exec app composer install
-```
-
-4. Entre no Shell do container do docker e rode as migrations
+3. Entre no Shell do container do docker e rode as migrations
 
  ```bash
     docker exec -it apache /bin/bash
     cd laravel
-    php artisan migration
+    composer install
+    php artisan migrate
+```
+4. Caso dê algum problema de permissão e não consiga criar um shortlink, rode o seguinte comando dentro da pasta laravel no Shell do container do docker.
+```bash
+  chmod -R 777 laravel/
 ```
 
 ### Executando a Aplicação
