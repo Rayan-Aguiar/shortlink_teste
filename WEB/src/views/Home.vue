@@ -2,8 +2,8 @@
   <div
     class="w-full min-h-screen h-fit bg-zinc-900 flex flex-col justify-center items-center"
   >
-    <div class="flex flex-col gap-8">
-      <div>
+    <div class="flex flex-col gap-8 p-8 md:p-0">
+      <div class="">
         <h1 class="text-white text-5xl font-bold">Encurtador de links</h1>
         <span class="text-zinc-500 mt-2"
           >Reduza o tamanho dos seus links para conferir-lhes uma aparência mais
@@ -103,11 +103,11 @@ export default {
           temporarilyInvalid.value = false;
           isInvalidLink.value = false;
 
-          console.log("Link encurtado com sucesso:", response.data);
+          
         } catch (error) {
           temporarilyInvalid.value = true;
           isInvalidLink.value = true;
-          console.error("Erro ao encurtar link:", error.message);
+          
         } finally {
           isLoading.value = false;
         }
@@ -117,7 +117,7 @@ export default {
         setTimeout(() => {
           temporarilyInvalid.value = false;
         }, 1000);
-        console.warn("Link inválido. Por favor, insira um link válido.");
+        
       }
     };
 
